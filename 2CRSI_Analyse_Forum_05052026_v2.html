@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2CRSi (AL2SI) — Analyse Forum | 05 mai 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #04060f;
+    --surface: #080c18;
+    --surface2: #0d1226;
+    --border: #131a30;
+    --heading: #eef0ff;
+    --text: #b8bde0;
+    --sub: #7c85b0;
+    --accent: #fb923c;
+    --accent2: #fdba74;
+    --green: #4ade80;
+    --red: #f87171;
+    --orange: #fb923c;
+    --blue: #60a5fa;
+    --purple: #c084fc;
+    --muted-text: #6872a8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 0 0 60px 0;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, #0a0f20 0%, #0d1428 50%, #0a0d1a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 0 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(251,146,60,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(251,146,60,0.12);
+    border: 1px solid rgba(251,146,60,0.3);
+    color: var(--accent);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 99px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    color: var(--heading);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-tagline {
+    font-size: 15px;
+    color: var(--sub);
+    margin-bottom: 24px;
+    max-width: 560px;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 20px;
+    font-size: 12.5px; color: var(--muted-text);
+  }
+  .hero-meta strong { color: var(--text); font-weight: 600; }
+  .hero-meta .live-badge {
+    background: rgba(74,222,128,0.12);
+    border: 1px solid rgba(74,222,128,0.25);
+    color: var(--green);
+    padding: 2px 10px; border-radius: 99px;
+    font-weight: 700; font-size: 11px;
+  }
+  .hero-disclaimer {
+    margin-top: 18px;
+    font-size: 10.5px;
+    color: #3d4a72;
+    font-style: italic;
+    border-left: 2px solid #131a30;
+    padding-left: 10px;
+  }
+
+  /* ── ALERTS ── */
+  .alerts { padding: 28px 0 0; display: flex; flex-direction: column; gap: 10px; }
+  .alert {
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    border-left: 3px solid transparent;
+    line-height: 1.5;
+  }
+  .alert strong { font-weight: 700; }
+  .ag { background: rgba(74,222,128,0.07); border-left-color: var(--green); color: #a7f3c0; }
+  .aw { background: rgba(251,191,36,0.07); border-left-color: #fbbf24; color: #fde68a; }
+  .ar { background: rgba(248,113,113,0.07); border-left-color: var(--red); color: #fca5a5; }
+  .ao { background: rgba(251,146,60,0.07); border-left-color: var(--orange); color: #fdba74; }
+  .ab { background: rgba(96,165,250,0.07); border-left-color: var(--blue); color: #93c5fd; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 36px 0 0; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(251,146,60,0.3), transparent);
+  }
+
+  /* ── KPI GRID ── */
+  .kg {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    transition: border-color .2s;
+  }
+  .kpi:hover { border-color: rgba(251,146,60,0.3); }
+  .kpi.accent { border-color: rgba(251,146,60,0.35); background: rgba(251,146,60,0.05); }
+  .kl {
+    font-size: 10.5px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted-text);
+    margin-bottom: 6px;
+  }
+  .kv {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px; font-weight: 700;
+    color: var(--heading);
+  }
+  .kpi.accent .kv { color: var(--accent); }
+  .kd {
+    font-size: 12px; font-weight: 600;
+    margin-top: 2px;
+  }
+  .kd.up { color: var(--green); }
+  .kd.dn { color: var(--red); }
+  .kd.nu { color: var(--sub); }
+  .ks {
+    font-size: 11px;
+    color: var(--muted-text);
+    margin-top: 2px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .card h3 {
+    font-size: 14px; font-weight: 700;
+    color: var(--heading);
+    margin-bottom: 10px;
+  }
+  .card p { font-size: 13.5px; color: #6872a8; line-height: 1.65; }
+  .card p strong { color: var(--text); }
+
+  /* ── DATA TABLE ── */
+  .dt { width: 100%; border-collapse: collapse; }
+  .dt thead tr { background: var(--surface2); }
+  .dt th {
+    padding: 9px 12px;
+    text-align: left;
+    font-size: 10.5px; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase;
+    color: var(--muted-text);
+  }
+  .dt td {
+    padding: 9px 12px;
+    font-size: 13px;
+    color: #6872a8;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .dt td strong { color: var(--text); font-weight: 600; }
+  .dt tbody tr:last-child td { border-bottom: none; }
+  .dt tbody tr:hover td { background: rgba(255,255,255,0.015); }
+  .dt .accent-cell { color: var(--accent); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .dt .green-cell { color: var(--green); font-weight: 600; }
+  .dt .red-cell { color: var(--red); font-weight: 600; }
+  .dt .warn-cell { color: #fbbf24; font-weight: 600; }
+
+  /* ── TIMELINE ── */
+  .tl { position: relative; padding-left: 24px; }
+  .tl::before {
+    content: '';
+    position: absolute;
+    left: 4px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+  }
+  .tli { position: relative; margin-bottom: 24px; }
+  .tli::before {
+    content: '';
+    position: absolute;
+    left: -24px; top: 5px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+    border: 2px solid var(--bg);
+  }
+  .tli.done::before { background: var(--green); }
+  .tli.key::before { background: var(--accent); box-shadow: 0 0 6px rgba(251,146,60,0.5); }
+  .tli.now::before { background: var(--red); box-shadow: 0 0 8px rgba(248,113,113,0.5); }
+  .tli.next::before { background: #fbbf24; }
+  .tli.future::before { background: var(--muted-text); }
+  .tld {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .tld.done { color: var(--green); }
+  .tld.key { color: var(--accent); }
+  .tld.now { color: var(--red); }
+  .tld.next { color: #fbbf24; }
+  .tld.future { color: var(--muted-text); }
+  .tldesc { font-size: 13.5px; color: #6872a8; line-height: 1.55; }
+  .tldesc strong { color: var(--text); }
+
+  /* ── FIBONACCI ── */
+  .fib-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 22px 18px;
+  }
+  .fib-header {
+    display: flex; justify-content: space-between;
+    font-size: 10.5px; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase;
+    color: var(--muted-text);
+    margin-bottom: 14px;
+  }
+  .frow {
+    display: grid;
+    grid-template-columns: 110px 1fr 110px;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(19,26,48,0.5);
+  }
+  .frow:last-child { border-bottom: none; }
+  .frow.coursactuel {
+    background: rgba(251,146,60,0.06);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 2px -12px;
+    border: 1px solid rgba(251,146,60,0.25);
+  }
+  .frow.support1 {
+    background: rgba(74,222,128,0.04);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 1px -12px;
+    border: 1px solid rgba(74,222,128,0.15);
+  }
+  .frow.support2 {
+    background: rgba(251,191,36,0.04);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 1px -12px;
+    border: 1px solid rgba(251,191,36,0.15);
+  }
+  .flvl { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #6872a8; font-weight: 600; }
+  .frow.coursactuel .flvl { color: var(--accent); }
+  .frow.support1 .flvl { color: var(--green); }
+  .frow.support2 .flvl { color: #fbbf24; }
+  .fbar-wrap { background: rgba(255,255,255,0.04); border-radius: 4px; height: 7px; }
+  .fbar { height: 7px; border-radius: 4px; background: rgba(251,146,60,0.2); }
+  .frow.coursactuel .fbar { background: var(--accent); }
+  .frow.support1 .fbar { background: var(--green); }
+  .frow.support2 .fbar { background: #fbbf24; }
+  .frow.ath .fbar { background: rgba(192,132,252,0.4); }
+  .fprice { font-family: 'JetBrains Mono', monospace; font-size: 13.5px; font-weight: 700; color: var(--text); text-align: right; }
+  .frow.coursactuel .fprice { color: var(--accent); font-size: 15px; }
+  .frow.support1 .fprice { color: var(--green); }
+  .frow.support2 .fprice { color: #fbbf24; }
+  .frow.ath .fprice { color: var(--purple); }
+
+  /* ── CONSENSUS ── */
+  .consensus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 540px) { .consensus-grid { grid-template-columns: 1fr; } }
+  .analyst-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .analyst-card .name { font-size: 13px; font-weight: 700; color: var(--heading); margin-bottom: 4px; }
+  .analyst-card .reco { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 8px; }
+  .reco.buy { color: var(--green); }
+  .reco.outperform { color: #60a5fa; }
+  .analyst-card .obj { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+  .analyst-card .date { font-size: 11px; color: var(--muted-text); }
+  .analyst-card .note { font-size: 12px; color: #6872a8; margin-top: 6px; line-height: 1.5; }
+
+  .consensus-box {
+    background: rgba(251,146,60,0.06);
+    border: 1px solid rgba(251,146,60,0.25);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-top: 14px;
+  }
+  .cbox-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 12px; }
+  .cbox-item .cl { font-size: 11px; color: var(--muted-text); margin-bottom: 4px; }
+  .cbox-item .cv { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; }
+  .cbox-item .cv.high { color: var(--green); }
+  .cbox-item .cv.mid { color: var(--accent); }
+  .cbox-item .cv.low { color: #fbbf24; }
+  .cbox-item .cv.reco { color: var(--accent); font-size: 15px; }
+  .cbox-note { font-size: 12px; color: #6872a8; border-top: 1px solid var(--border); padding-top: 12px; line-height: 1.6; }
+  .cbox-note strong { color: var(--text); }
+
+  /* ── VALORISATION PROJETS ── */
+  .valuation-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .vc-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .vc-tag {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 6px;
+  }
+  .vc-tag.inde { background: rgba(251,146,60,0.12); color: var(--accent); }
+  .vc-tag.aether { background: rgba(96,165,250,0.12); color: var(--blue); }
+  .vc-tag.california { background: rgba(192,132,252,0.12); color: var(--purple); }
+  .vc-name { font-size: 14px; font-weight: 700; color: var(--heading); }
+  .vc-body { font-size: 13px; color: #6872a8; line-height: 1.65; }
+  .vc-body strong { color: var(--text); }
+  .vc-metrics { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; }
+  .vc-m { background: var(--surface2); border-radius: 8px; padding: 8px 12px; }
+  .vc-m .ml { font-size: 10px; color: var(--muted-text); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+  .vc-m .mv { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; color: var(--text); }
+
+  /* ── AVIS PERSO ── */
+  .pc {
+    background: linear-gradient(135deg, rgba(251,146,60,0.05) 0%, rgba(13,18,38,0) 100%);
+    border: 1px solid rgba(251,146,60,0.25);
+    border-radius: 14px;
+    padding: 22px 24px;
+  }
+  .pc-score { font-family: 'JetBrains Mono', monospace; font-size: 40px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+  .pc-label { font-size: 11px; color: var(--muted-text); font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 16px; }
+  .pc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 540px) { .pc-cols { grid-template-columns: 1fr; } }
+  .pc ul { list-style: none; padding: 0; }
+  .pc ul li {
+    font-size: 13px;
+    color: #6872a8;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 8px;
+    line-height: 1.5;
+  }
+  .pc ul li:last-child { border-bottom: none; }
+  .pc ul li::before { font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+  .pc ul.pros li::before { content: '✦'; color: var(--green); }
+  .pc ul.cons li::before { content: '▲'; color: var(--red); font-size: 10px; }
+  .pc-sub { font-size: 11.5px; color: var(--muted-text); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+
+  /* ── CONCLUSION ── */
+  .conclu {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-top: 14px;
+  }
+  .conclu h3 { font-size: 15px; font-weight: 700; color: var(--heading); margin-bottom: 12px; }
+  .conclu p { font-size: 13.5px; color: #6872a8; line-height: 1.65; margin-bottom: 10px; }
+  .conclu p strong { color: var(--text); }
+  .hlo { background: rgba(251,146,60,0.15); color: var(--accent); padding: 0 5px; border-radius: 4px; font-weight: 600; }
+  .levels-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .level-pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  .level-pill .lp-label { color: var(--muted-text); font-size: 10.5px; text-transform: uppercase; font-weight: 700; letter-spacing: .06em; margin-bottom: 3px; }
+  .level-pill .lp-val { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; }
+  .level-pill.res .lp-val { color: var(--red); }
+  .level-pill.sup .lp-val { color: var(--green); }
+  .level-pill.cat .lp-val { color: #fbbf24; font-size: 12px; }
+  .level-pill.now .lp-val { color: var(--accent); }
+
+  /* ── QUOTE ── */
+  .quote-box {
+    background: rgba(96,165,250,0.05);
+    border: 1px solid rgba(96,165,250,0.2);
+    border-left: 3px solid var(--blue);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+  .quote-text { font-size: 14px; color: #93c5fd; line-height: 1.6; font-style: italic; }
+  .quote-source { font-size: 11px; color: var(--muted-text); margin-top: 6px; }
+
+  /* ── FOOTER ── */
+  footer { border-top: 1px solid var(--border); margin-top: 48px; padding-top: 24px; }
+  footer p { font-size: 11px; color: #3d4a72; line-height: 1.65; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .kg { grid-template-columns: repeat(2, 1fr); }
+    .frow { grid-template-columns: 90px 1fr 90px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-badge">⚡ IA &amp; Serveurs HPC — Euronext Growth</div>
+    <h1>2CRSi <span>AL2SI</span></h1>
+    <p class="hero-tagline">Le champion strasbourgeois des serveurs IA. Un milliard de dollars de valorisation franchi. Et une ambition qui ne s'arrête pas là.</p>
+    <div class="hero-meta">
+      <div><span class="live-badge">LIVE</span></div>
+      <div>📅 <strong>05 mai 2026</strong></div>
+      <div>💶 Cours <strong>~37,66 €</strong> (+3,75% ce matin)</div>
+      <div>🏭 Siège <strong>Strasbourg, France</strong></div>
+      <div>🔢 ISIN <strong>FR0013341781</strong></div>
+    </div>
+    <p class="hero-disclaimer">Analyse personnelle à titre informatif uniquement — pas un conseil en investissement. NPC.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+<!-- ══════════════ ALERTES ══════════════ -->
+<div class="alerts">
+  <div class="alert ag">
+    <strong>🟢 Milliard $ franchi le 13 avril :</strong> 2CRSi a dépassé le seuil du milliard de dollars de capitalisation boursière mi-avril 2026. Alain Wilmouth (PDG) : <em>"Ce n'est qu'une étape."</em> Ambition affichée : >1 Md€ de CA à horizon 2027, sans dilution.
+  </div>
+  <div class="alert ao">
+    <strong>🟡 Californie 290 M€ décalé à l'été :</strong> La livraison de l'AI Factory Sacramento (Nvidia Blackwell Ultra, 40 MW) est reportée de 3 mois — raison : adaptation des infras énergétiques côté client. Pas d'impact sur la valeur du contrat, mais impact sur le CA du T3.
+  </div>
+  <div class="alert ab">
+    <strong>🔵 Portzamparc : décote >90% vs Super Micro :</strong> Dans sa liste de convictions S2, Portzamparc note que la décote de 2CRSi par rapport à son comparable américain Super Micro dépasse 90% — et appelle cela "l'une de nos convictions pour les prochaines années". Guidances jugées "prudentes".
+  </div>
+  <div class="alert aw">
+    <strong>⚠️ Guidance EBITDA conditionnelle :</strong> Le communiqué du 26 mars fixe un EBITDA annuel <em>"supérieur à 36 M€, en fonction du rythme de déploiement des projets."</em> Ce n'est pas une promesse ferme — c'est conditionnel à l'exécution des contrats. Le décalage de Californie (3 mois) pèse directement sur cette condition. Tension sur les marges S1 à 4,7%, exposition USD/EUR (~45% des revenus).
+  </div>
+</div>
+
+<!-- ══════════════ KPI GRID ══════════════ -->
+<div class="section">
+  <div class="section-title">Indicateurs clés</div>
+  <div class="kg">
+    <div class="kpi accent">
+      <div class="kl">Cours 05/05/2026</div>
+      <div class="kv">37,66 €</div>
+      <div class="kd up">+3,75% ce matin</div>
+      <div class="ks">Veille clôture : 36,30 €</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">ATH absolu</div>
+      <div class="kv">43,20 €</div>
+      <div class="kd nu">22 avril 2026</div>
+      <div class="ks">Distance ATH : -12,8%</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Perf. 52 semaines</div>
+      <div class="kv">×11,7</div>
+      <div class="kd up">3,86 € → 43,20 €</div>
+      <div class="ks">Performance YoY hors norme</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Capitalisation</div>
+      <div class="kv">~840 M€</div>
+      <div class="kd nu">~1 Md$ (franchi 13 avr.)</div>
+      <div class="ks">22,5 M actions en circ.</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">CA S1 2025/26</div>
+      <div class="kv">204,7 M€</div>
+      <div class="kd up">×9,8 vs S1 préc.</div>
+      <div class="ks">vs 20,9 M€ an dernier</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">EBITDA S1</div>
+      <div class="kv">9,6 M€</div>
+      <div class="kd up">×4,6 vs S1 préc.</div>
+      <div class="ks">Marge 4,7% — à améliorer</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Guidance CA</div>
+      <div class="kv">>400 M€</div>
+      <div class="kd up">Exercice 2025/26</div>
+      <div class="ks">>300 M€ déjà sécurisés</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Guidance EBITDA</div>
+      <div class="kv">>36 M€</div>
+      <div class="kd nu">Objectif exercice</div>
+      <div class="ks">Conditionnel : "en fonction du rythme de déploiement des projets"</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Ambition 2027</div>
+      <div class="kv">>1 Md€</div>
+      <div class="kd up">CA horizon 2026/27</div>
+      <div class="ks">Croissance organique</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Potentiel CA annuel*</div>
+      <div class="kv">~700 M€</div>
+      <div class="kd nu">*sans contraintes ext.</div>
+      <div class="ks">Source : A. Wilmouth, mai 2026</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Contrat Californie</div>
+      <div class="kv">290 M€</div>
+      <div class="kd nu">Livraison été 2026</div>
+      <div class="ks">Décalé 3 mois (énergie client)</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Contrat Japon</div>
+      <div class="kv">140 M€</div>
+      <div class="kd up">En cours de livraison</div>
+      <div class="ks">Fin juin 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ INTERVIEW PDG ══════════════ -->
+<div class="section">
+  <div class="section-title">Le PDG parle — ce qu'il dit vraiment</div>
+
+  <div class="quote-box">
+    <div class="quote-text">« Le milliard de dollars de valorisation en Bourse, ce n'est qu'une étape. Notre carnet de commandes et notre capacité industrielle nous permettraient d'atteindre, sans contraintes externes, des niveaux proches de 700 millions d'euros de CA sur cet exercice. »</div>
+    <div class="quote-source">— Alain Wilmouth, PDG de 2CRSi · Le Journal des Entreprises, avril 2026</div>
+  </div>
+
+  <div class="card">
+    <h3>Les 3 piliers de la trajectoire milliard</h3>
+    <p><strong>1 — Vente de serveurs :</strong> Pilier historique, gamme Godì 1.8, GPU Nvidia. Croissance portée par la demande IA et le refroidissement immersif — technologie maîtrisée par 2CRSi depuis 15 ans.</p>
+    <p style="margin-top:10px;"><strong>2 — Services 2CRSi Cloud Solutions :</strong> Division lancée en mars 2025. Prestations d'hébergement, d'intégration et d'exploitation. Marges supérieures à la vente matérielle. Montée en puissance en cours.</p>
+    <p style="margin-top:10px;"><strong>3 — Projets d'infrastructures AI Factory :</strong> Contrat 290 M$ Californie (AI Factory 40 MW), consortium ÆTHER Grand Est. Des projets structurants, aux délais plus longs, mais à forte valeur et récurrence potentielle. C'est là que se joue le scénario milliard 2027.</p>
+  </div>
+</div>
+
+<!-- ══════════════ PRÉSENTATION & OFFRES ══════════════ -->
+<div class="section">
+  <div class="section-title">Présentation société &amp; offres</div>
+  <div style="overflow-x:auto; border-radius:12px; border:1px solid var(--border);">
+    <table class="dt">
+      <thead>
+        <tr><th>Offre / Gamme</th><th>Description</th><th>Statut / Différenciateur</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Serveurs Godì 1.8</strong></td>
+          <td class="accent-cell">Moteur S1 2025/26</td>
+          <td>GPU AI servers, haute densité, OCP — plébiscité par les big buyers IA</td>
+        </tr>
+        <tr>
+          <td><strong>GPU / AI Servers (Blackwell Ultra)</strong></td>
+          <td>Nvidia GB200/H200, DPU BlueField-3</td>
+          <td>Référence HPC pour IA, ML, DL dans les déploiements à grande échelle</td>
+        </tr>
+        <tr>
+          <td><strong>Refroidissement immersif</strong></td>
+          <td>Chemours (JDA), Valeo Inde</td>
+          <td><strong>15 ans d'avance</strong> — barrière technologique réelle vs concurrents</td>
+        </tr>
+        <tr>
+          <td><strong>2CRSi Cloud Solutions</strong></td>
+          <td>Division services (mars 2025)</td>
+          <td>Conseil, conception AI Factory, meilleure marge — montée en puissance</td>
+        </tr>
+        <tr>
+          <td><strong>Valeo Inde — Edge Data Center</strong></td>
+          <td>Centre de données périphérique immersif autonome (sans eau)</td>
+          <td>Démarrage production : <strong>novembre 2026</strong> — marché 5G + IA Inde</td>
+        </tr>
+        <tr>
+          <td><strong>ÆTHER Infrastructures</strong></td>
+          <td>AI Factory 40 MW — Grand Est (18 fév. 2026)</td>
+          <td>Négociation exclusive site industriel — projet structurant long terme</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════ VALORISATION PROJETS STRUCTURANTS ══════════════ -->
+<div class="section">
+  <div class="section-title">Valorisation des projets structurants</div>
+  <p style="font-size:13px; color:#6872a8; margin-bottom:16px; line-height:1.6;">Ces projets ne sont pas encore reflétés dans le CA actuel mais représentent l'essentiel du scénario de valorisation long terme. Les évaluer est indispensable pour comprendre pourquoi un objectif de cours à 60 € peut se justifier.</p>
+
+  <div class="valuation-card">
+    <div class="vc-header">
+      <span class="vc-tag california">Contrat 610 M$</span>
+      <span class="vc-name">AI Factory Sacramento — California</span>
+    </div>
+    <div class="vc-body">
+      Première commande de <strong>290 M€</strong> dans un contrat global de <strong>610 M$</strong>. Site à proximité de Sacramento, alimenté par une centrale à biomasse (énergie décarbonée). Capacité finale : <strong>40 MW d'ici fin 2027</strong>. Infrastructure complète : 2 304 GPU Nvidia Blackwell Ultra, DPU BlueField-3, stockage WEKA haute performance. Livraison désormais prévue à l'été 2026 (décalage de 3 mois lié à l'adaptation des infras énergétiques côté client — sans impact sur la valeur du contrat).
+      <strong>Solde du contrat global : ~320 M$ à venir.</strong>
+    </div>
+    <div class="vc-metrics">
+      <div class="vc-m"><div class="ml">Commande en cours</div><div class="mv">290 M€</div></div>
+      <div class="vc-m"><div class="ml">Solde contrat global</div><div class="mv">~320 M$</div></div>
+      <div class="vc-m"><div class="ml">Livraison</div><div class="mv">Été 2026</div></div>
+      <div class="vc-m"><div class="ml">Capacité finale site</div><div class="mv">40 MW</div></div>
+    </div>
+  </div>
+
+  <div class="valuation-card">
+    <div class="vc-header">
+      <span class="vc-tag aether">Projet structurant</span>
+      <span class="vc-name">Consortium ÆTHER Infrastructures — Grand Est</span>
+    </div>
+    <div class="vc-body">
+      2CRSi a initié, au sein du consortium <strong>ÆTHER Infrastructure</strong>, une négociation exclusive pour l'implantation d'un site industriel dans la région Grand Est (annoncé le 18 février 2026). Ce site AI Factory de <strong>40 MW</strong> représente le premier déploiement d'infrastructure IA en France à cette échelle. Alain Wilmouth l'identifie comme un pilier clé vers le milliard de CA. Projet structurant mais dépendant de l'accès à l'énergie et des décisions publiques — horizon plus long que les contrats commerciaux classiques. <strong>Potentiel de revenus récurrents élevé</strong> (hébergement + services + exploitation).
+    </div>
+    <div class="vc-metrics">
+      <div class="vc-m"><div class="ml">Capacité cible</div><div class="mv">40 MW</div></div>
+      <div class="vc-m"><div class="ml">Localisation</div><div class="mv">Grand Est, France</div></div>
+      <div class="vc-m"><div class="ml">Statut</div><div class="mv">Négociation exclusive</div></div>
+      <div class="vc-m"><div class="ml">Nature</div><div class="mv">Infrastructure long terme</div></div>
+    </div>
+  </div>
+
+  <div class="valuation-card">
+    <div class="vc-header">
+      <span class="vc-tag inde">Nouveau marché</span>
+      <span class="vc-name">Alliance Valeo–2CRSi — Inde (5G + IA)</span>
+    </div>
+    <div class="vc-body">
+      Depuis novembre 2025, Valeo et 2CRSi développent conjointement une <strong>solution de refroidissement immersif autonome</strong> (sans eau) pour centres de données périphériques décentralisés. La solution, présentée à l'AI Impact Summit de New Delhi (16-20 fév. 2026), est totalement fonctionnelle et conçue pour fonctionner sans maintenance dans des conditions climatiques extrêmes. Elle s'adresse aux <strong>opérateurs télécoms indiens</strong> déployant la 5G et l'IA localement. Le cycle de validation doit aboutir à un <strong>démarrage de production en novembre 2026</strong>. Ce partenariat ouvre un marché potentiel considérable : l'Inde est le 2e déploiement 5G mondial en volume.
+    </div>
+    <div class="vc-metrics">
+      <div class="vc-m"><div class="ml">Partenaire</div><div class="mv">Valeo</div></div>
+      <div class="vc-m"><div class="ml">Démarrage prod.</div><div class="mv">Nov. 2026</div></div>
+      <div class="vc-m"><div class="ml">Marché cible</div><div class="mv">Télécom 5G Inde</div></div>
+      <div class="vc-m"><div class="ml">Technologie</div><div class="mv">Immersif autonome</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ CHRONOLOGIE ══════════════ -->
+<div class="section">
+  <div class="section-title">Chronologie des événements clés</div>
+  <div class="tl">
+    <div class="tli done">
+      <div class="tld done">Janvier 2024 — Contrat fondateur</div>
+      <div class="tldesc">Signature du <strong>contrat global 610 M$</strong> avec un client américain. Socle de la transformation boursière du titre.</div>
+    </div>
+    <div class="tli done">
+      <div class="tld done">Mars 2025 — 2CRSi Cloud Solutions</div>
+      <div class="tldesc">Création de la division services. Prestations d'hébergement, intégration, exploitation. Diversification vers des marges supérieures.</div>
+    </div>
+    <div class="tli done">
+      <div class="tld done">Septembre 2025 — Commande Californie 290 M$</div>
+      <div class="tldesc">Annonce de la première commande dans le contrat 610 M$. AI Factory Sacramento, 40 MW, Nvidia Blackwell Ultra. Titre <strong>+11%</strong> en séance.</div>
+    </div>
+    <div class="tli done">
+      <div class="tld done">Novembre 2025 — Partenariat Valeo Inde</div>
+      <div class="tldesc">Initiation du partenariat avec Valeo pour une solution de refroidissement immersif autonome dédiée aux data centers décentralisés 5G en Inde.</div>
+    </div>
+    <div class="tli done">
+      <div class="tld done">Janvier 2026 — S1 record 198 M€</div>
+      <div class="tldesc">CA S1 >198 M€, multiplié par ~10 vs l'an dernier. Résultats complets publiés le 26 mars : <strong>204,7 M€ CA, 9,6 M€ EBITDA</strong>. Guidance >400 M€ annuel annoncée.</div>
+    </div>
+    <div class="tli done">
+      <div class="tld done">Fév. 2026 — Contrat Japon 140 M€ + Valeo Inde public</div>
+      <div class="tldesc"><strong>140 M€ Japon :</strong> en cours de livraison, fin juin 2026. Présentation de la solution Valeo–2CRSi Inde à l'AI Impact Summit de New Delhi (16-20 fév.).</div>
+    </div>
+    <div class="tli done">
+      <div class="tld done">18 Fév. 2026 — ÆTHER Infrastructures</div>
+      <div class="tldesc">2CRSi initie une négociation exclusive pour l'implantation d'un site <strong>AI Factory 40 MW</strong> dans le Grand Est, dans le cadre du consortium ÆTHER.</div>
+    </div>
+    <div class="tli done">
+      <div class="tld done">Mars 2026 — Chemours JDA</div>
+      <div class="tldesc">Accord de développement conjoint avec <strong>Chemours</strong> pour le refroidissement immersif, suite à la qualification réussie du fluide. Titre <strong>+13,5%</strong> en séance.</div>
+    </div>
+    <div class="tli done">
+      <div class="tld done">13 Avril 2026 — Milliard de dollars franchi</div>
+      <div class="tldesc">2CRSi franchit pour la première fois le cap du <strong>milliard de dollars de capitalisation boursière</strong>. ATH touché à 43,20 € le 22 avril (+×11,7 vs bas 52 semaines).</div>
+    </div>
+    <div class="tli now">
+      <div class="tld now">05 Mai 2026 — Cours actuel</div>
+      <div class="tldesc">Consolidation post-ATH. Cours à <strong>~37,66 €</strong> (+3,75% ce matin). Le titre consolide entre 35 et 40 €. Japon en cours de livraison finale.</div>
+    </div>
+    <div class="tli next">
+      <div class="tld next">Été 2026 — Livraison Californie 290 M€</div>
+      <div class="tldesc">Livraison du méga-contrat Sacramento décalé de 3 mois. Catalyseur CA T3 direct. Test de la guidance >400 M€ et de la marge opérationnelle sur gros projets.</div>
+    </div>
+    <div class="tli future">
+      <div class="tld future">23 Juillet 2026 — CA annuel</div>
+      <div class="tldesc">Publication du <strong>chiffre d'affaires annuel 2025/26</strong>. Première vérification officielle de la guidance >400 M€. Première lecture de la rentabilité annuelle.</div>
+    </div>
+    <div class="tli future">
+      <div class="tld future">Novembre 2026 — Démarrage production Inde</div>
+      <div class="tldesc">Démarrage de production prévu pour la solution Valeo–2CRSi en Inde, suite au cycle de validation. Ouverture d'un nouveau marché géographique majeur.</div>
+    </div>
+    <div class="tli future">
+      <div class="tld future">29 Octobre 2026 — Résultats annuels complets</div>
+      <div class="tldesc">Résultats 2025/26. Verdict sur EBITDA >36 M€, marges, et trajectoire vers le milliard. Catalyseur majeur pour la suite de la valorisation.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ FIBONACCI ══════════════ -->
+<div class="section">
+  <div class="section-title">Analyse technique — Niveaux Fibonacci</div>
+  <div class="fib-section">
+    <div class="fib-header">
+      <span>Niveau / Zone</span>
+      <span>Pondération relative</span>
+      <span>Prix (€)</span>
+    </div>
+
+    <div class="frow ath">
+      <div class="flvl" style="color:var(--purple);">ATH absolu</div>
+      <div class="fbar-wrap"><div class="fbar" style="width:100%; background:rgba(192,132,252,0.4);"></div></div>
+      <div class="fprice">43,20 €</div>
+    </div>
+    <div class="frow coursactuel">
+      <div class="flvl">▶ COURS 05/05</div>
+      <div class="fbar-wrap"><div class="fbar" style="width:87%;"></div></div>
+      <div class="fprice">~37,66 €</div>
+    </div>
+    <div class="frow support1">
+      <div class="flvl">Fib 23,6%</div>
+      <div class="fbar-wrap"><div class="fbar" style="width:76%;"></div></div>
+      <div class="fprice">33,92 €</div>
+    </div>
+    <div class="frow">
+      <div class="flvl">Fib 38,2%</div>
+      <div class="fbar-wrap"><div class="fbar" style="width:62%;"></div></div>
+      <div class="fprice">28,17 €</div>
+    </div>
+    <div class="frow support2">
+      <div class="flvl">Fib 50,0%</div>
+      <div class="fbar-wrap"><div class="fbar" style="width:50%;"></div></div>
+      <div class="fprice">23,53 €</div>
+    </div>
+    <div class="frow">
+      <div class="flvl">Fib 61,8%</div>
+      <div class="fbar-wrap"><div class="fbar" style="width:40%;"></div></div>
+      <div class="fprice">18,87 €</div>
+    </div>
+    <div class="frow">
+      <div class="flvl">Fib 100% (base)</div>
+      <div class="fbar-wrap"><div class="fbar" style="width:10%;"></div></div>
+      <div class="fprice">3,86 €</div>
+    </div>
+
+    <div style="margin-top:16px; font-size:12px; color:#6872a8; line-height:1.65; border-top:1px solid var(--border); padding-top:14px;">
+      <strong style="color:var(--text);">Lecture :</strong> Fibonacci tracé depuis le creux 52 semaines (<strong style="color:var(--text);">3,86 €</strong>) à l'ATH du 22 avril (<strong style="color:var(--text);">43,20 €</strong>). Le cours à 37,66 € reste <strong style="color:var(--text);">au-dessus du premier support Fib</strong> (23,6% = 33,92 €). Structure haussière intacte. Zone de consolidation naturelle : 33,90–36,30 €.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ CONSENSUS ANALYSTES ══════════════ -->
+<div class="section">
+  <div class="section-title">Consensus des analystes</div>
+
+  <div class="consensus-grid">
+    <div class="analyst-card">
+      <div class="name">Portzamparc</div>
+      <div class="reco buy">● Achat — Conviction S2 2026</div>
+      <div class="obj" style="font-size:16px;">Objectif relevé récemment</div>
+      <div class="date">Dernier objectif publié : 28,50 € (18 fév. 2026)</div>
+      <div class="note">Maintenu dans la liste de convictions S2 : <strong style="color:var(--text);">"décote >90% vs Super Micro"</strong>, guidances jugées <strong style="color:var(--text);">"prudentes"</strong>, <strong style="color:var(--text);">"une de nos convictions pour les prochaines années"</strong>. L'objectif a fait l'objet d'un relèvement récent (non indexé publiquement), cohérent avec le consensus haut ci-dessous.</div>
+    </div>
+    <div class="analyst-card">
+      <div class="name">Oddo BHF</div>
+      <div class="reco outperform">● Surperformer</div>
+      <div class="obj">Révisé ↑</div>
+      <div class="date">Révision à la hausse : 19 fév. 2026 (depuis 17 €)</div>
+      <div class="note">Recommandation Surperformer maintenue. Objectif exact de la dernière révision non disponible publiquement.</div>
+    </div>
+  </div>
+
+  <div class="consensus-box">
+    <div class="cbox-row">
+      <div class="cbox-item">
+        <div class="cl">Recommandation moyenne</div>
+        <div class="cv reco">ACCUMULER</div>
+      </div>
+      <div class="cbox-item">
+        <div class="cl">Nb d'analystes</div>
+        <div class="cv mid">3</div>
+      </div>
+      <div class="cbox-item">
+        <div class="cl">Objectif moyen</div>
+        <div class="cv mid">39,40 €</div>
+      </div>
+      <div class="cbox-item">
+        <div class="cl">Objectif haut</div>
+        <div class="cv high">60,60 €</div>
+      </div>
+      <div class="cbox-item">
+        <div class="cl">Objectif bas</div>
+        <div class="cv low">24,10 €</div>
+      </div>
+    </div>
+    <div class="cbox-note">
+      <strong>Sources :</strong> Zonebourse consensus (3 analystes, ~2 semaines, clôture ref. 36,30 €) · Note abonnés Portzamparc (objectif haut <strong>60,60 €</strong>, confirmé — non indexée publiquement). L'objectif moyen à 39,40 € est tiré vers le bas par une note plus ancienne (24,10 €) — la dispersion est forte, reflet d'une valeur en pleine réévaluation fondamentale.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ RISQUES ══════════════ -->
+<div class="section">
+  <div class="section-title">Risques à surveiller</div>
+  <div style="overflow-x:auto; border-radius:12px; border:1px solid var(--border);">
+    <table class="dt">
+      <thead>
+        <tr><th>Risque</th><th>Nature</th><th>Niveau</th><th>Commentaire</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Guidance EBITDA conditionnelle</strong></td>
+          <td>Financier</td>
+          <td><span class="warn-cell">Élevé</span></td>
+          <td>Le communiqué officiel dit : "EBITDA supérieur à 36 M€, <em>en fonction du rythme de déploiement des projets</em>." Formulation conditionnelle — pas une promesse ferme. Le décalage Californie fragilise cette condition.</td>
+        </tr>
+        <tr>
+          <td><strong>Décalage Californie</strong></td>
+          <td>Exécution</td>
+          <td><span class="warn-cell">Modéré</span></td>
+          <td>3 mois de glissement (printemps → été). Pas d'impact valeur mais décalage de trésorerie et CA T3.</td>
+        </tr>
+        <tr>
+          <td><strong>Exposition USD/EUR (~45%)</strong></td>
+          <td>Change</td>
+          <td><span class="warn-cell">Modéré</span></td>
+          <td>Baisse de l'USD = impact direct sur CA et marges en euros. Portzamparc l'identifie explicitement.</td>
+        </tr>
+        <tr>
+          <td><strong>Pénuries composants</strong></td>
+          <td>Supply chain</td>
+          <td><span class="warn-cell">Modéré</span></td>
+          <td>DRAM, NAND, processeurs. A déjà causé l'ajustement du contrat Malaisie (~10 M€ d'impact vs 48 M$ initial).</td>
+        </tr>
+        <tr>
+          <td><strong>ÆTHER — dépendances externes</strong></td>
+          <td>Réglementaire</td>
+          <td><span class="warn-cell">Modéré</span></td>
+          <td>Le PDG le dit clairement : accès à l'énergie et décisions publiques peuvent décaler ces projets structurants.</td>
+        </tr>
+        <tr>
+          <td><strong>Valorisation élevée</strong></td>
+          <td>Marché</td>
+          <td><span class="warn-cell">Élevé</span></td>
+          <td>Multiple ambitieux sur EBITDA annuel guidé. Tout ratage de guidance sera amplifié sur le cours.</td>
+        </tr>
+        <tr>
+          <td><strong>Volatilité small cap momentum</strong></td>
+          <td>Marché</td>
+          <td><span class="warn-cell">Modéré</span></td>
+          <td>Très sensible aux rotations et corrections macro. Le titre peut corriger -15%/-20% sans alerte fondamentale.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════ AVIS PERSO ══════════════ -->
+<div class="section">
+  <div class="section-title">Mon avis personnel</div>
+  <div class="pc">
+    <div class="pc-score">7,5<span style="font-size:22px;color:var(--sub);">/10</span></div>
+    <div class="pc-label">Constructif — 3 piliers solides, S2 à confirmer, projets structurants = catalyseurs différés</div>
+    <div class="pc-cols">
+      <div>
+        <div class="pc-sub">Pour ✦</div>
+        <ul class="pros">
+          <li>Carnet de commandes béton : 290 M€ Californie + 140 M€ Japon + ÆTHER + Inde = visibilité exceptionnelle</li>
+          <li>15 ans d'avance sur le refroidissement immersif — barrière technologique que les concurrents ne peuvent pas reproduire rapidement</li>
+          <li>Décote >90% vs Super Micro (comparable américain) : la réévaluation est fondamentalement justifiée</li>
+          <li>Ambition >1 Md€ CA 2027 sans appel au marché — pas de risque de dilution CT</li>
+          <li>PDG charismatique et engagé : Alain Wilmouth parle vrai, assume les contraintes, pense long terme</li>
+          <li>Inde/Valeo : nouveau marché colossal (5G + IA) avec démarrage de production visé en novembre 2026</li>
+        </ul>
+      </div>
+      <div>
+        <div class="pc-sub">Contre ▲</div>
+        <ul class="cons">
+          <li>Marges S1 à 4,7% : trop faible pour une capi à 840 M€ — le S2 doit impérativement délivrer</li>
+          <li>Potentiel CA sans contraintes : ~700 M€ — mais les contraintes existent et le management le reconnaît</li>
+          <li>ÆTHER et Inde sont des projets à horizon 2026-2027 : ils ne contribuent pas au CA actuel</li>
+          <li>45% de revenus en USD : la faiblesse du dollar ampute les marges en euros</li>
+          <li>Aucun catalyseur binaire immédiat avant le CA annuel du 23 juillet (79 jours)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="conclu">
+    <h3>💬 Verdict — Une thèse solide, une valorisation qui anticipe l'exécution</h3>
+    <p>
+      2CRSi n'est plus une small cap spéculative : c'est un <strong>acteur structurel des infrastructures IA en Europe</strong>, avec un PDG qui pense en milliards et une technologie que ses concurrents mettent des années à reproduire. Le contrat Californie, ÆTHER, l'Inde avec Valeo — ce sont des piliers réels, pas des annonces creuses.
+    </p>
+    <p>
+      La décote >90% vs Super Micro citée par Portzamparc est l'argument clé. À production équivalente, 2CRSi vaudrait plusieurs fois son cours actuel. Le marché commence à intégrer cela — mais il attend des preuves concrètes sur les marges.
+    </p>
+    <p>
+      Le vrai test arrive cet été : la <span class="hlo">livraison du contrat Californie</span> et le <span class="hlo">CA annuel du 23 juillet</span>. La guidance EBITDA ">36 M€" est <strong>conditionnelle au rythme de déploiement des projets</strong> — formulation exacte du communiqué. Si Californie livre à l'heure et que la rentabilité S2 est au rendez-vous, les 60,60 € de Portzamparc trouvent leur justification fondamentale. Dans le cas contraire, la correction sera sévère.
+    </p>
+    <div class="levels-row">
+      <div class="level-pill res">
+        <div class="lp-label">Résistance 1</div>
+        <div class="lp-val">43,20 €</div>
+      </div>
+      <div class="level-pill res">
+        <div class="lp-label">Résistance 2</div>
+        <div class="lp-val">40,00 €</div>
+      </div>
+      <div class="level-pill now">
+        <div class="lp-label">Cours 05/05</div>
+        <div class="lp-val">~37,66 €</div>
+      </div>
+      <div class="level-pill sup">
+        <div class="lp-label">Support 1 — Fib 23,6%</div>
+        <div class="lp-val">33,92 €</div>
+      </div>
+      <div class="level-pill sup">
+        <div class="lp-label">Support 2 — Fib 38,2%</div>
+        <div class="lp-val">28,17 €</div>
+      </div>
+      <div class="level-pill cat">
+        <div class="lp-label">Catalyseur 1 — 79 jours</div>
+        <div class="lp-val">23 juillet — CA annuel</div>
+      </div>
+      <div class="level-pill cat">
+        <div class="lp-label">Catalyseur 2</div>
+        <div class="lp-val">Été 2026 — Livraison 290 M€</div>
+      </div>
+      <div class="level-pill cat">
+        <div class="lp-label">Obj. analyste haut</div>
+        <div class="lp-val">60,60 € (Portzamparc abonnés)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <p>
+    <strong style="color:var(--muted-text);">Sources vérifiées :</strong> Communiqués de presse 2CRSi (investors.2crsi.com) · Résultats S1 2025/26 (26 mars 2026) · Interview Alain Wilmouth — Le Journal des Entreprises (avril 2026) · Interview Alain Wilmouth — Easybourse · Zonebourse consensus (actualisé ~2 semaines, clôture ref. 36,30 €) · Investing.com (04/05/2026) · Communiqués Valeo/2CRSi Inde (16 fév. 2026, TradingView) · Portzamparc liste convictions S2 (ABC Bourse) · Fortuneo cours live (04 mai 09:24).
+  </p>
+  <p style="margin-top:8px;">
+    <strong style="color:var(--muted-text);">Avertissement :</strong> Analyse personnelle à titre informatif uniquement. Pas un conseil en investissement. Tout investissement comporte un risque de perte en capital. Pas un conseiller financier agréé. NPC.
+  </p>
+</footer>
+
+</div>
+</body>
+</html>
